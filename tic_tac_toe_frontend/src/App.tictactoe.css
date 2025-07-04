@@ -1,0 +1,208 @@
+:root {
+  /* Game specific palette from requirements */
+  --primary-color: #1976d2;
+  --secondary-color: #424242;
+  --accent-color: #fbc02d;
+  /* General light theme */
+  --ttt-bg: #fff;
+  --ttt-border: #e0e0e0;
+  --ttt-cell-bg: #f9f9fb;
+  --ttt-cell-hover: #e7f1fd;
+  --ttt-x-color: var(--primary-color);
+  --ttt-o-color: var(--accent-color);
+  --ttt-btn-bg: var(--primary-color);
+  --ttt-btn-text: #fff;
+  --ttt-btn-accent-bg: var(--accent-color);
+  --ttt-btn-accent-text: #333;
+}
+
+body {
+  background: var(--ttt-bg);
+}
+
+/* Main app/stage styling */
+.ttt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px 0 32px;
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: 80px;
+}
+
+.ttt-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin: 0;
+  letter-spacing: -2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.ttt-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.ttt-footer {
+  text-align: center;
+  margin: 32px 0 16px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+/* Game Board (centered grid) */
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 20px auto;
+  background: var(--ttt-bg);
+  border-radius: 16px;
+  box-shadow: 0 3px 24px rgba(25, 118, 210, 0.08);
+}
+
+.ttt-row {
+  display: flex;
+}
+
+.ttt-cell {
+  width: 72px;
+  height: 72px;
+  background: var(--ttt-cell-bg);
+  border: 2px solid var(--ttt-border);
+  border-radius: 12px;
+  margin: 4px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(31, 32, 33, 0.06);
+}
+.ttt-cell[disabled] {
+  background: #eeeff2;
+  opacity: 0.7;
+  cursor: default;
+}
+
+.ttt-cell:not([disabled]):hover {
+  background: var(--ttt-cell-hover);
+  border-color: var(--primary-color);
+}
+
+/* X/O colors */
+.ttt-cell:contains('X'), .ttt-x {
+  color: var(--ttt-x-color);
+}
+.ttt-cell:contains('O'), .ttt-o {
+  color: var(--ttt-o-color);
+}
+
+/* Game info/status styling */
+.ttt-status {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin: 18px 0 0 0;
+  min-height: 2.6em;
+}
+.ttt-winner {
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.ttt-draw {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Controls */
+.ttt-controls {
+  display: flex;
+  margin: 24px 0 0 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ttt-btn, .ttt-btn-accent, .ttt-btn-mode {
+  padding: 9px 18px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  margin: 0 7px;
+  transition: background 0.18s, box-shadow 0.17s;
+}
+
+.ttt-btn {
+  background: var(--primary-color);
+  color: var(--ttt-btn-text);
+}
+.ttt-btn-accent {
+  background: var(--ttt-btn-accent-bg);
+  color: var(--ttt-btn-accent-text);
+}
+.ttt-btn-mode {
+  background: #f5f6fa;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+.ttt-btn-mode.ttt-active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.ttt-btn:hover, .ttt-btn-accent:hover, .ttt-btn-mode:hover {
+  filter: brightness(1.09);
+  box-shadow: 0 1px 8px rgba(31, 32, 33, 0.16);
+}
+
+.ttt-mode-switch {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .ttt-header {
+    flex-direction: column;
+    padding: 16px 0 0 0;
+    min-height: 50px;
+  }
+  .ttt-title {
+    font-size: 2rem;
+  }
+  .ttt-main {
+    min-height: 56vh;
+  }
+  .ttt-board .ttt-cell {
+    width: 51px;
+    height: 51px;
+    font-size: 1.5rem;
+    margin: 3px;
+  }
+}
+
+/* Visually hide focus ring outline unless keyboard nav */
+.ttt-cell:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
